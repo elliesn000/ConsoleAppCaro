@@ -9,6 +9,10 @@ namespace CaroApp
     {        
         static void Main()
         {
+            User user = UserManager.CreateUser();
+            UserManager.ShowUserInfo(user);
+            Console.ReadLine();
+
             int inputsize = 10;            
             CaroBoard board = new CaroBoard(inputsize);
 
