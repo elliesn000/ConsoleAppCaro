@@ -24,6 +24,14 @@ namespace Classes
             Console.WriteLine($"Your ID: {user.UserID}");
             Console.WriteLine($"Your Email: {user.Email}");
             Console.WriteLine("------------------------------------");
+            Console.ReadLine();
+        }
+
+        public static void ShowUserInGame(User user)
+        {
+            Console.WriteLine("\n------------------------------------");            
+            Console.WriteLine($"Your ID: {user.UserID}");            
+            Console.WriteLine("------------------------------------");
         }
     }
 }

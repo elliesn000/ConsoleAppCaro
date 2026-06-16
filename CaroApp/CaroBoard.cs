@@ -13,6 +13,4 @@ public class CaroBoard
         Board = new int[size, size];
     }
 
-
-
 }
