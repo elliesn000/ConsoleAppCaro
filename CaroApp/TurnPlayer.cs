@@ -4,7 +4,7 @@ namespace Classes;
 public class TurnPlayer
 {
 
-    public static bool PlayerTurn(CaroBoard board)
+    public static bool PlayerTurn(Piece board)
     {
         Console.WriteLine();
         Console.Write("Input row col (R C): ");
@@ -24,6 +24,7 @@ public class TurnPlayer
         int col = userCol - 1;
 
         bool success = CaroBoardLogic.CheckMove(board, row, col, 1);
+
         if (!success)
         {
             Console.WriteLine("❌ Invalid Input!");

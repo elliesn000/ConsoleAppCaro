@@ -1,13 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
-namespace Classes;
+﻿using System;
+namespace DbClasses;
+
 public class Piece
+
 {
-    [Key]
     public int PieceID { get; set; }
+    public int Color { get; set; }
+    public int[,]? Cordinate { get; set; }
+    public Game? Games { get; set; }
 
-    public int GameID { get; set; }
-
-    public string Color { get; set; } = string.Empty;
-    public string Cordinates { get; set; } = string.Empty;    
 }

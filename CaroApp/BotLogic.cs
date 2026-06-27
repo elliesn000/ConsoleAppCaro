@@ -5,7 +5,7 @@ namespace Classes;
 public class BotLogic
 {
     //Auto TRẢ VỀ NƯỚC ĐI(O = 2)
-    static public (int row, int col) GetAutoMove(CaroBoard board)
+    static public (int row, int col) GetAutoMove(Piece board)
     {
         int Size = board.Size;
         int[,] Board = board.Board;

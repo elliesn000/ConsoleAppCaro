@@ -1,37 +1,48 @@
 ﻿using System;
+using DbClasses;
 
-namespace Classes
+namespace DbClasses;
+
+public class UserManager
 {
-    public static class UserManager
-    {        
-        public static User CreateUser()
+    public static string CheckEmail()
+    {
+        while (true)
         {
-            Console.Write("Input Email: ");
-            string email = Console.ReadLine();
-
-            Console.Write("Input Password: ");
-            string password = Console.ReadLine();
-            
-            User user = new User(email, password);
-
-            return user;
+            Console.WriteLine("Input Email to Login");
+            string? inputEmail = Console.ReadLine();
+            if (!Classes.InputParse.IsValidEmail(inputEmail!))
+            {
+                Console.WriteLine("Error: Email invalid");
+                continue;
+            }
+            return inputEmail!;
         }
-                
-        public static void ShowUserInfo(User user)
-        {
-            Console.WriteLine("\n------------------------------------");
-            Console.WriteLine("Create Account Complete.");
-            Console.WriteLine($"Your ID: {user.UserID}");
-            Console.WriteLine($"Your Email: {user.Email}");
-            Console.WriteLine("------------------------------------");
-            Console.ReadLine();
-        }
+    }
 
-        public static void ShowUserInGame(User user)
+    public static string Login(string inputEmail)
+    {
+        using (var context = new AppDbContext())
         {
-            Console.WriteLine("\n------------------------------------");            
-            Console.WriteLine($"Your ID: {user.UserID}");            
-            Console.WriteLine("------------------------------------");
+            var user = context.Users.Find(inputEmail);
+            if (user != null)
+            {
+                Console.WriteLine($"Login User {inputEmail}");
+                return inputEmail;
+            }
+            else
+            {
+                Console.WriteLine($" User with name {inputEmail} not found.");
+                Console.WriteLine("\n------ Creating a user ------");
+
+                User newUser = new User { EmailId = inputEmail };
+                context.Add(newUser);
+                context.SaveChanges();
+                Console.WriteLine($"Add user Done: {newUser.EmailId}");
+                Console.WriteLine("--------------------------------");
+
+                return inputEmail;
+            }
         }
     }
 }

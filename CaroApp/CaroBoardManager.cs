@@ -1,8 +1,40 @@
-﻿using System;
+﻿using DbClasses;
+using System;
 namespace Classes;
 
 public class CaroBoardManager	
 {
+    public static void NewGame()
+    {
+        while (true)
+        {
+            int boardSize = Classes.InputParse.GetInt("Input Size Board or Press 0 to Return User Menu");
+            if (boardSize != 0)
+            {
+                CaroBoard board = new CaroBoard(boardSize);
+            }
+            else
+                return;
+
+            CaroBoardManager.DrawBoard(board);
+            CaroBoardLogic.WinLose(board);
+
+
+            if (!TurnPlayer.PlayerTurn(board))
+                continue;
+
+            Console.Clear();
+            UserManager.ShowUserInGame(user);
+            CaroBoardManager.DrawBoard(board);
+            CaroBoardLogic.WinLose(board);
+
+
+            TurnBot.AutoTurn(board);
+
+            return;
+
+        }
+    }
     public static void DrawBoard(CaroBoard board)
     {
         int size = board.Size;

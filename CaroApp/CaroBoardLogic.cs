@@ -2,9 +2,9 @@
 using System.Drawing;
 namespace Classes;
 
-public class CaroBoardLogic	
+public class CaroBoardLogic
 {
-    static public bool CheckMove(CaroBoard board, int row, int col, int player)
+    static public bool CheckMove(Piece board, int row, int col, int player)
     {
         if (row < 0 || row >= board.Size || col < 0 || col >= board.Size)
             return false;
@@ -13,10 +13,11 @@ public class CaroBoardLogic
             return false;
 
         board.Board[row, col] = player;
+
         return true;
     }
 
-    static public void WinLose(CaroBoard board)
+    static public void WinLose(Piece board)
     {
         int[,] Board = board.Board;
         int Size = board.Size;
@@ -56,9 +57,15 @@ public class CaroBoardLogic
                             if (count == 5)
                             {
                                 if (checkValue == 1)
+                                {
                                     Console.WriteLine("You Win");
+                                }
+
                                 if (checkValue == 2)
+                                {
                                     Console.WriteLine("You Lose");
+                                }
+
                             }
                         }
                     }
