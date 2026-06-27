@@ -45,4 +45,38 @@ public class UserManager
             }
         }
     }
+
+    public static void SeeAllHistory(string inputUser)
+    {
+        using (var context = new AppDbContext())
+        {
+            var history = context.Games
+                .Where(p => p.Users.EmailId == inputUser)
+                .ToList();
+            if (history.Count != 0)
+            {
+                foreach (var h in history)
+                {
+                    Console.WriteLine($"- GameId {h.GameId}: {h.State}");
+                }
+
+                int choose = Classes.InputParse.GetInt("Input Id to see or Press 0 to return User Menu");
+                if (choose != 0)
+                {   
+                    GameManager.DrawBoardHistory(choose, inputUser);
+                }
+                else
+                    return;
+            }
+            //history null
+            else
+            {
+                Console.WriteLine("None history");
+                Console.ReadLine();
+                return;
+            }
+
+
+        }
+    }
 }

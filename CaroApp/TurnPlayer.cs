@@ -4,12 +4,12 @@ namespace Classes;
 public class TurnPlayer
 {
 
-    public static bool PlayerTurn(Piece board)
+    public static bool PlayerTurn(CaroBoard board)
     {
         Console.WriteLine();
         Console.Write("Input row col (R C): ");
 
-        string? input = Console.ReadLine(); //warning: dereference null
+        string? input = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(input))
             return false;
 
@@ -27,8 +27,8 @@ public class TurnPlayer
 
         if (!success)
         {
-            Console.WriteLine("❌ Invalid Input!");
-            Console.ReadKey();
+            Console.WriteLine("Error: Input (R C) Invalid");
+            Console.ReadLine();
             return false;
         }
         return true;

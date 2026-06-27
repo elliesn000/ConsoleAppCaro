@@ -2,8 +2,8 @@
 namespace Classes;
 public class CaroBoard
 {
-        public int Size { get; }
-        public int[,] Pieces { get; }
+        public int Size { get; set; }
+        public int[,] Pieces { get; set; }
 
         public CaroBoard(int size)
         {

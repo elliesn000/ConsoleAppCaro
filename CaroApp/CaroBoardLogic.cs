@@ -4,22 +4,22 @@ namespace Classes;
 
 public class CaroBoardLogic
 {
-    static public bool CheckMove(Piece board, int row, int col, int player)
+    static public bool CheckMove(CaroBoard board, int row, int col, int player)
     {
         if (row < 0 || row >= board.Size || col < 0 || col >= board.Size)
             return false;
 
-        if (board.Board[row, col] != 0)
+        if (board.Pieces[row, col] != 0)
             return false;
 
-        board.Board[row, col] = player;
+        board.Pieces[row, col] = player; //return Pieces
 
         return true;
     }
 
-    static public void WinLose(Piece board)
+    static public int WinLose(CaroBoard board)
     {
-        int[,] Board = board.Board;
+        int[,] Board = board.Pieces;
         int Size = board.Size;
 
         for (int i = 0; i < Size; i++)
@@ -44,7 +44,7 @@ public class CaroBoardLogic
                                     j_ += jk;
                                     if (i_ >= 0 && i_ < Size && j_ >= 0 && j_ < Size)
                                     {
-                                        if (board.Board[i_, j_] == checkValue)
+                                        if (board.Pieces[i_, j_] == checkValue)
                                         {
                                             count++;
                                             continue;
@@ -59,19 +59,26 @@ public class CaroBoardLogic
                                 if (checkValue == 1)
                                 {
                                     Console.WriteLine("You Win");
+                                    return 1;
                                 }
 
                                 if (checkValue == 2)
                                 {
-                                    Console.WriteLine("You Lose");
+                                    Console.WriteLine("You Lose"); //Bot Win
+                                    return 2;
                                 }
-
                             }
+                            
                         }
+                        
                     }
+                    
                 }
+                
 
             }
         }
+        return 0;
+        
     }
 }

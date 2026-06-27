@@ -4,11 +4,11 @@ namespace Classes;
 
 public class BotLogic
 {
-    //Auto TRẢ VỀ NƯỚC ĐI(O = 2)
-    static public (int row, int col) GetAutoMove(Piece board)
+    //(O = 2) (X = 1)
+    static public (int row, int col) GetAutoMove(CaroBoard board)
     {
         int Size = board.Size;
-        int[,] Board = board.Board;
+        int[,] Board = board.Pieces;
         //4_X
         for (int i = 0; i < Size; i++)
         {
