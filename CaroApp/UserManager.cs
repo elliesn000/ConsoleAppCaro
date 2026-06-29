@@ -1,5 +1,5 @@
 ﻿using System;
-using DbClasses;
+using Classes;
 
 namespace DbClasses;
 
@@ -10,13 +10,13 @@ public class UserManager
         while (true)
         {
             Console.WriteLine("Input Email to Login");
-            string? inputEmail = Console.ReadLine();
-            if (!Classes.InputParse.IsValidEmail(inputEmail!))
+            string inputEmail = Console.ReadLine();
+            if (!Classes.InputParse.IsValidEmail(inputEmail))
             {
-                Console.WriteLine("Error: Email invalid");
+                Console.WriteLine("Error: Email invalid. Input again");
                 continue;
             }
-            return inputEmail!;
+            return inputEmail;
         }
     }
 
@@ -44,6 +44,7 @@ public class UserManager
                 return inputEmail;
             }
         }
+
     }
 
     public static void SeeAllHistory(string inputUser)
@@ -55,14 +56,20 @@ public class UserManager
                 .ToList();
             if (history.Count != 0)
             {
+
                 foreach (var h in history)
                 {
-                    Console.WriteLine($"- GameId {h.GameId}: {h.State}");
+                    string state;
+                    if (h.State == 1)
+                        state = "You Win";
+                    else
+                        state = "You Lose";
+                    Console.WriteLine($"- Id {h.GameId} : {state}");
                 }
 
                 int choose = Classes.InputParse.GetInt("Input Id to see or Press 0 to return User Menu");
                 if (choose != 0)
-                {   
+                {
                     GameManager.DrawBoardHistory(choose, inputUser);
                 }
                 else
@@ -75,8 +82,19 @@ public class UserManager
                 Console.ReadLine();
                 return;
             }
+        }
+    }
 
 
+    public static void ShowAllUser()
+    {
+        using (var context = new AppDbContext())
+        {
+            var users = context.Users.ToList();
+            foreach (var u in users)
+            {
+                Console.WriteLine($"- {u.EmailId}");
+            }
         }
     }
 }

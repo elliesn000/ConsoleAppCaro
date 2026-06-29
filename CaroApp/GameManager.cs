@@ -1,4 +1,5 @@
 ﻿using Classes;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Drawing;
 namespace DbClasses;
@@ -16,13 +17,15 @@ public class GameManager
             context.Add(game);
 
             int[,] piece = board.Pieces;
+
+
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
                     if (piece[i, j] != 0)
                     {
-                        Piece pieces = new Piece { Color = piece[i, j], Cordinate = piece, Games = game };
+                        Piece pieces = new Piece { Color = piece[i, j], X = i, Y = j, Games = game };
                         context.Add(pieces);
 
                     }
@@ -42,6 +45,7 @@ public class GameManager
             var historyGame = context.Games
                 .Where(p => p.GameId == gameId && p.Users == user)
                 .FirstOrDefault();
+
             if (historyGame != null)
             {
                 int size = historyGame.Size;
@@ -50,11 +54,15 @@ public class GameManager
 
                 foreach (var p in allPieces)
                 {
-                    board.Pieces = p.Cordinate!;
+                    int[,] P = new int[p.X, p.Y];
+                    board.Pieces = P;
+
                 }
+
                 CaroBoardManager.DrawBoard(board);
                 Console.WriteLine($" You {historyGame.State}");
                 Console.WriteLine($" Comment: {historyGame.Comment}");
+
             }
             else
             {

@@ -8,6 +8,7 @@ public class CaroBoard
         public CaroBoard(int size)
         {
             Size = size;
-            Pieces = new int[size, size];
+            Pieces = new int[size,size];
         }
+    
 }

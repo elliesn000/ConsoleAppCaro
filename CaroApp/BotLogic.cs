@@ -306,7 +306,9 @@ public class BotLogic
                                     if (i + 4 * ik >= 0 && i + 4 * ik < Size && j + 4 * jk >= 0 && j + 4 * jk < Size && Board[i + 4 * ik, j + 4 * jk] == 0)
                                         return (i + 4 * ik, j + 4 * jk);
                                 }
-                                else if (Board[i - ik, j - jk] == 0)
+                                else 
+                                    
+                                    if (Board[i - ik, j - jk] == 0)
                                     return (i - ik, j - jk);
                                 else //(Board[i - ik, j - jk] == 2)
                                 {
@@ -513,7 +515,7 @@ public class BotLogic
         }
 
 
-        // normal move
+        // begin move
         for (int r = Size / 2; r < Size; r++)
         {
             for (int c = Size / 2; c < Size; c--)
@@ -547,6 +549,21 @@ public class BotLogic
                 }
             continue;
         }
-        return (10, 10);
-    }    
+
+
+
+        //for (int r = 0; r < Size; r++)
+        //{
+        //    for (int c = 0; c < Size; c++)
+        //    {
+        //        if (Board[r, c] == 0)
+        //        {
+        //            return (r, c);
+        //        }
+        //        else break;
+
+        //    }
+        //}
+        return (Size, Size);
+    }
 }

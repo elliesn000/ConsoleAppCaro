@@ -6,12 +6,10 @@ public class TurnPlayer
 
     public static bool PlayerTurn(CaroBoard board)
     {
-        Console.WriteLine();
-        Console.Write("Input row col (R C): ");
+        
+        string input = InputParse.GetString("Input row col (R C): ");
+        
 
-        string? input = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(input))
-            return false;
 
         string[] parts = input.Split(' ');
         if (parts.Length != 2)
@@ -28,7 +26,7 @@ public class TurnPlayer
         if (!success)
         {
             Console.WriteLine("Error: Input (R C) Invalid");
-            Console.ReadLine();
+            Console.ReadKey();
             return false;
         }
         return true;

@@ -12,7 +12,7 @@ public class CaroBoardLogic
         if (board.Pieces[row, col] != 0)
             return false;
 
-        board.Pieces[row, col] = player; //return Pieces
+        board.Pieces[row, col] = player; //return Pieces //insert in array => can use
 
         return true;
     }
