@@ -8,7 +8,8 @@ public class GameManager
 {
     public static void NewHistory(CaroBoard board, string userEmail, int state)
     {
-        using (var context = new AppDbContext())
+        using (
+            var context = new AppDbContext())
         {
             string comment = Classes.InputParse.GetString("Input Comment");
             var user = context.Users.Find(userEmail);
@@ -50,13 +51,14 @@ public class GameManager
             {
                 int size = historyGame.Size;
                 CaroBoard board = new(historyGame.Size);
-                var allPieces = historyGame.Pieces.ToList();
+                var allPieces = context.Pieces
+                    .Where(p=>p.Games == historyGame)
+                    .ToList();
 
                 foreach (var p in allPieces)
                 {
-                    int[,] P = new int[p.X, p.Y];
-                    board.Pieces = P;
-
+                    //int[,] P = new int[p.X, p.Y];
+                    board.Pieces[p.X,p.Y]= p.Color;
                 }
 
                 CaroBoardManager.DrawBoard(board);
