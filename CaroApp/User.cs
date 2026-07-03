@@ -1,28 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-namespace Classes;
+namespace DbClasses;
 
 public class User
 {
-    private static int s_userIDSeed = 1234567890;
-
     [Key]
-    public int UserID { get; }
-    
+    public string EmailId { get; set; } = string.Empty;
 
-    [Required]
-    [MaxLength(30)]
-    public string Email { get; set; }
+    public List<Game> Games { get; set; } = new();
 
-    [Required]
-    [MaxLength(255)]
-    public string Password { get; set; }
-
-    public User(string email, string password)
-    {
-        Email = email;
-        Password = password;
-        UserID = s_userIDSeed;
-        s_userIDSeed++;
-    }
 }

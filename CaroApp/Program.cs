@@ -1,39 +1,23 @@
 ﻿
+using Classes;
+using DbClasses;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Drawing;
-using Classes;
 
-namespace CaroApp
+namespace Classes;
+
+public class Program
 {
-    public class Program
-    {        
-        static void Main()
+    static void Main()
+    {
+        while (true)
         {
-            User user = UserManager.CreateUser();
-            UserManager.ShowUserInfo(user);
-            Console.ReadLine();
-
-            int inputsize = 10;            
-            CaroBoard board = new CaroBoard(inputsize);
-
-            while (true)
-            {
-                Console.Clear();
-                CaroBoardManager.DrawBoard(board);
-                CaroBoardLogic.WinLose(board);
-
-                
-                if (!TurnPlayer.PlayerTurn(board))
-                    continue;
-
-                Console.Clear();
-                CaroBoardManager.DrawBoard(board);
-                CaroBoardLogic.WinLose(board);
-
-                
-                TurnBot.AutoTurn(board);
-            }
+            DbClasses.UserManager.ShowAllUser();
+            UserMenu.ShowUserMenu(UserManager.Login(UserManager.CheckEmail()));
         }
     }
 }
+    
+
 
